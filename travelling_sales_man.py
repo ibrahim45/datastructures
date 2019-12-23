@@ -1,6 +1,11 @@
 # Author: Ibrahim Sha
 # ibrahim45@github
 
+# TODO: Find which path is shortest???
+# TODO: Reverse startegy for finding node?
+# TODO: Dynamic programming on implementing problem
+
+
 class TravellingSalesManProblem:
     data = [
         [0, 10, 15, 20],
