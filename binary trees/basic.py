@@ -16,9 +16,14 @@ class Tree:
 
     def __init__(self):
         self.root = None
+        self.count = 0
+
+    def count(self):
+        return self.count
 
     def new_node(self, data, right=None, left=None):
         node = Node(data, right, left)
+        self.count += 1
         return node
 
     def add_node_in_subtree(self, root, node):
@@ -33,7 +38,7 @@ class Tree:
                     return;
             else:
                 if ele.right:
-                    ele = ele.left
+                    ele = ele.right
                 else:
                     ele.right = node
                     print("Child Right Node created sucessfully...")
@@ -75,33 +80,41 @@ class Tree:
 
     def print_output(self, root):
         ele = root
-        print(ele.data)
         while ele:
+            print(ele.data)
             if ele.left:
-                print(ele.left.data)
+                # print(ele.left.data)
                 self.print_output(ele.left)
             if ele.right:
-                print(ele.right.data)
+                # print(ele.right.data)
                 self.print_output(ele.right)
             break;
 
+    def get_height(self, ele):
+        if ele is None:
+            return -1
+        return max(self.get_height(ele.left), self.get_height(ele.right)) + 1
 
-                
+    def get_min(self, ele):
+        if ele is None:
+            return -1
+        return min(self.get_height(ele.left), self.get_height(ele.right))
+
 
 
 tree = Tree()
-# insert a node 2
+tree.insert(4)
 tree.insert(2)
-# insert a node 1
-tree.insert(1)
-# insert a node 10
-tree.insert(10)
-# insert a  node 5
 tree.insert(5)
+tree.insert(1)
+tree.insert(3)
 # tree.print_format() # TODO: Need to be done
 tree.print_output(tree.root)
-print(tree.root)
-print(tree)
+print("height of node is  {0}".format(tree.get_height(tree.root)))
+print("min val of node is  {0}".format(tree.get_height(tree.root)))
+
+
+
 
 
 
