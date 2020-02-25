@@ -44,14 +44,15 @@ class Tree:
                     print("Child Right Node created sucessfully...")
                     return;
 
-    def insert(self, data):
-        node = self.new_node(data)
-        if not self.root:
-            self.root = node
-            print("Root Node created successfully...")
-        else:
-            result = self.add_node_in_subtree(self.root, node)
-            print("All child nodes created successfully..")
+    def insert(self, inputNode):
+        for data in inputNode:
+            node = self.new_node(data)
+            if not self.root:
+                self.root = node
+                print("Root Node created successfully...")
+            else:
+                result = self.add_node_in_subtree(self.root, node)
+                print("All child nodes created successfully..")
 
 
     def delete(self):
@@ -95,23 +96,33 @@ class Tree:
             return -1
         return max(self.get_height(ele.left), self.get_height(ele.right)) + 1
 
-    def get_min(self, ele):
-        if ele is None:
-            return -1
-        return min(self.get_height(ele.left), self.get_height(ele.right))
 
+    def min_node(self, ele):
+        if ele.left is None and ele.right is None:
+            return ele.data
+        elif ele.left is None:
+            return min(ele.data, self.min_node(ele.right))
+        elif ele.right is None:
+            return min(ele.data, self.min_node(ele.left))
+        else:
+            return min(ele.data, min(self.min_node(ele.left), self.min_node(ele.right)))
 
-
+    def max_node(self, ele):
+        if ele.left is None and ele.right is None:
+            return ele.data
+        elif ele.left is None:
+            return max(ele.data, self.max_node(ele.right))
+        elif ele.right is None:
+            return max(ele.data, self.max_node(ele.left))
+        else:
+            return max(ele.data, max(self.max_node(ele.left), self.max_node(ele.right)))
 tree = Tree()
-tree.insert(4)
-tree.insert(2)
-tree.insert(5)
-tree.insert(1)
-tree.insert(3)
+tree.insert([4, 0.2, 5, 11, 3, 10])
 # tree.print_format() # TODO: Need to be done
 tree.print_output(tree.root)
 print("height of node is  {0}".format(tree.get_height(tree.root)))
-print("min val of node is  {0}".format(tree.get_height(tree.root)))
+print("min val of node is  {0}".format(tree.min_node(tree.root)))
+print("max val of node is  {0}".format(tree.max_node(tree.root)))
 
 
 
