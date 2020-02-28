@@ -117,7 +117,7 @@ class Tree:
         else:
             return max(ele.data, max(self.max_node(ele.left), self.max_node(ele.right)))
 tree = Tree()
-tree.insert([4, 0.2, 5, 11, 3, 10])
+tree.insert([10, 7, 14, 20, 1, 5, 8])
 # tree.print_format() # TODO: Need to be done
 tree.print_output(tree.root)
 print("height of node is  {0}".format(tree.get_height(tree.root)))
